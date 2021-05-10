@@ -15,7 +15,7 @@ type handleSubmit = (event: FormEvent<HTMLFormElement>) => void;
 
 interface ISignupHook extends IInputValuesHook<ISignupInputState> {
   handleSubmit: handleSubmit;
-  errorMessagge: string;
+  errorMessage: string;
 }
 
 type TSignupHook = () => ISignupHook;
@@ -29,7 +29,7 @@ const useSignup: TSignupHook = () => {
     confirmPassword: '',
   });
 
-  const [errorMessagge, setErrorMessagge] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const [_isMounted, setIsMounted] = useState(true);
 
@@ -39,9 +39,11 @@ const useSignup: TSignupHook = () => {
     e.preventDefault();
     const responseData = await AuthenticationService.signup(inputValues);
 
-    if (responseData.error && _isMounted) setErrorMessagge(responseData.message);
-
-    router.push('/login');
+    if (responseData.error && _isMounted) {
+      setErrorMessage(responseData.message);
+    } else {
+      router.push('/login');
+    }
   };
 
   useEffect(
@@ -51,7 +53,7 @@ const useSignup: TSignupHook = () => {
     []
   );
 
-  return { handleOnChange, inputValues, handleSubmit, errorMessagge };
+  return { handleOnChange, inputValues, handleSubmit, errorMessage };
 };
 
 export default useSignup;

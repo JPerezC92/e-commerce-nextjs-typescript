@@ -6,7 +6,7 @@ const SignupScreen = (): JSX.Element => {
 
   return (
     <>
-      <div>{signupHook.errorMessagge.length > 0 && <div>{signupHook.errorMessagge}</div>}</div>
+      <div>{signupHook.errorMessage.length > 0 && <div>{signupHook.errorMessage}</div>}</div>
 
       <form onSubmit={signupHook.handleSubmit}>
         <label htmlFor="firstName">
@@ -15,6 +15,7 @@ const SignupScreen = (): JSX.Element => {
             type="text"
             name="firstName"
             id="firstName"
+            required
             onChange={signupHook.handleOnChange}
             value={firstName}
           />
@@ -26,6 +27,7 @@ const SignupScreen = (): JSX.Element => {
             type="text"
             name="lastName"
             id="lastName"
+            required
             onChange={signupHook.handleOnChange}
             value={lastName}
           />
@@ -37,6 +39,7 @@ const SignupScreen = (): JSX.Element => {
             type="email"
             name="email"
             id="email"
+            required
             onChange={signupHook.handleOnChange}
             value={email}
           />
@@ -48,6 +51,7 @@ const SignupScreen = (): JSX.Element => {
             type="text"
             name="password"
             id="password"
+            required
             onChange={signupHook.handleOnChange}
             value={password}
           />
@@ -59,6 +63,7 @@ const SignupScreen = (): JSX.Element => {
             type="text"
             name="confirmPassword"
             id="confirmPassword"
+            required
             onChange={signupHook.handleOnChange}
             value={confirmPassword}
           />
