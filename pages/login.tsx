@@ -1,7 +1,11 @@
-import { FunctionComponent } from 'react';
+import LoginScreen from '@/components/Pages/LoginScreen';
 
-const Login: FunctionComponent = () => {
-  return <div>Login</div>;
+const Login = (): JSX.Element => {
+  return (
+    <>
+      <LoginScreen></LoginScreen>
+    </>
+  );
 };
 
 export default Login;

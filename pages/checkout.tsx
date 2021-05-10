@@ -1,6 +1,6 @@
 import CheckoutScreen from '@/components/Pages/CheckoutScreen';
-import { APP_NAME } from 'app/utils/constants';
 import Head from 'next/head';
+import { APP_NAME } from 'app/utils/constants';
 import { FunctionComponent } from 'react';
 
 const Checkout: FunctionComponent = () => {

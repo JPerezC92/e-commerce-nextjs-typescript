@@ -10,9 +10,9 @@ export interface IBasketHook {
   handleDelete: handleDelete;
 }
 
-type BasketHook = () => IBasketHook;
+type TBasketHook = () => IBasketHook;
 
-const useBasket: BasketHook = () => {
+const useBasket: TBasketHook = () => {
   const { basketId, basketProducts, setBasketProducts } = useBasketState();
 
   const handleAdd: handleAdd = async (basketProduct) => {

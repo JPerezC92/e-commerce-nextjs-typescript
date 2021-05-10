@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import Products from '../../db/models/Products';
-import connectDB from '../../db/connectDB';
+import connectDB from 'db/connectDB';
+import Products from 'db/models/Products';
 
 const products = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
   try {

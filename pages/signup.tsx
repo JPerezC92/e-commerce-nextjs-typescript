@@ -1,7 +1,11 @@
-import React from 'react';
+import SignupScreen from '@/components/Pages/SignupScreen';
 
 const Signup = (): JSX.Element => {
-  return <div>Signup</div>;
+  return (
+    <>
+      <SignupScreen />
+    </>
+  );
 };
 
 export default Signup;

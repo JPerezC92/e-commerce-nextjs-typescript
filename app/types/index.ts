@@ -55,19 +55,19 @@ Api Response
 ================================
 */
 
-export interface IReqResponse {
+export interface IResponse {
   error: boolean;
   message?: string;
 }
 
-export interface IProductsReqResponse extends IReqResponse {
+export interface IProductsReqResponse extends IResponse {
   payload: IProduct[];
 }
 
-export interface IProductReqResponse extends IReqResponse {
+export interface IProductReqResponse extends IResponse {
   payload: IProduct;
 }
 
-export interface IBasketResponse extends IReqResponse {
+export interface IBasketResponse extends IResponse {
   payload: IBasket;
 }
