@@ -23,9 +23,19 @@ export interface IBasketProduct {
   quantity?: number;
 }
 
+export interface IUser {
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
 export interface IBasket {
   _id: string;
   items: IBasketProduct[];
+}
+
+export interface ISession extends IUser {
+  basketId: string;
 }
 
 /*

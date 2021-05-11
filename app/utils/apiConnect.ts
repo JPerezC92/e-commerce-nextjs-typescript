@@ -1,4 +1,5 @@
 import baseUrl from './baseUrl';
+import fetch from 'isomorphic-fetch';
 
 interface IConfig {
   input: RequestInfo;

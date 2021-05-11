@@ -1,11 +1,11 @@
 import apiConnect from 'app/utils/apiConnect';
 import { ISignupInputState } from 'app/hooks/useSignup';
-import { IResponse } from '../types';
+import { IResponse, ISession } from '../types';
+import { ILoginInputState } from 'app/hooks/useLogin';
 
-// interface ISignupResponse {
-//   error: boolean;
-//   message: string;
-// }
+interface ILoginResponse extends IResponse {
+  session: ISession;
+}
 
 export default {
   signup: async (values: ISignupInputState): Promise<Required<IResponse>> => {
@@ -22,7 +22,17 @@ export default {
     return data;
   },
 
-  login: async (): Promise<void> => {
-    return;
+  login: async (values: ILoginInputState): Promise<ILoginResponse> => {
+    const result = await apiConnect({
+      input: 'login',
+      init: {
+        method: 'POST',
+        body: JSON.stringify(values),
+        headers: { 'Content-Type': 'application/json' },
+      },
+    });
+
+    const data = await result.json();
+    return data;
   },
 };
