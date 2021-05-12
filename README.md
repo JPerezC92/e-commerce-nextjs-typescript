@@ -191,5 +191,13 @@
 * execute ```npm run dev```
 * Open browser in localhost:3000
 
+
+## Configure environment variables
+
+Create a file with the name `.env.local` file in the root directory.
+
+Set the `JWT_SECRET_KEY` and `MONGO_URI` variable in `.env.local`.
+
+
 ## Url project
 https://e-commerce-delta-dun.vercel.app/

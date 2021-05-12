@@ -28,6 +28,7 @@ const Navbar = (): JSX.Element => {
       </Link>
 
       <ul>
+        {session.isLoggedIn && <li>Hello {session.firstName}</li>}
         <li>
           <Link href="/checkout">
             <a>
@@ -61,7 +62,6 @@ const Navbar = (): JSX.Element => {
           </li>
         )}
       </ul>
-
       <style jsx>{`
         header {
           padding: 0 2%;
