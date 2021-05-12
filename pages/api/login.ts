@@ -49,8 +49,7 @@ const login = async (
       email: user.email,
       basketId: user.basketId,
     };
-    const jwt =
-      sign(claims, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }) || 'here';
+    const jwt = sign(claims, process.env.JWT_SECRET_KEY, { expiresIn: '1h' });
 
     res.setHeader(
       'Set-Cookie',
@@ -63,13 +62,11 @@ const login = async (
       })
     );
 
-    return res
-      .status(200)
-      .json({
-        error: false,
-        message: 'Welcome back to the app!',
-        session: claims,
-      });
+    return res.status(200).json({
+      error: false,
+      message: 'Welcome back to the app!',
+      session: claims,
+    });
   } catch (error) {
     return res
       .status(500)

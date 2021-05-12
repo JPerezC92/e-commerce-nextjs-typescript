@@ -38,7 +38,6 @@ const totalItemsQuantityAndTotalCost = (basketProducts: IBasketProduct[]) =>
   );
 
 const BasketStateProvider: FunctionComponent = ({ children }) => {
-  // const basketId = '608debb581d6a16540948074';
   const { session } = useSessionState();
   const [basketProducts, setBasketProducts] = useState([] as IBasketProduct[]);
 
@@ -52,6 +51,8 @@ const BasketStateProvider: FunctionComponent = ({ children }) => {
       BasketService.getById(session.basketId).then((data) => {
         if (!data.error) setBasketProducts(data.payload.items);
       });
+    } else {
+      setBasketProducts([]);
     }
   }, [session.isLoggedIn]);
 

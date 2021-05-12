@@ -45,4 +45,10 @@ export default {
     const data = await result.json();
     return data;
   },
+
+  logout: async (): Promise<IResponse> => {
+    const result = await apiConnect({ input: 'logout' });
+    const data = await result.json();
+    return data;
+  },
 };

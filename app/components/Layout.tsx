@@ -1,12 +1,19 @@
+import { useSessionState } from 'app/context/Session';
 import { ReactNode } from 'react';
 import Navbar from './Navbar';
 
 const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
+  const { session } = useSessionState();
   return (
     <>
       <Navbar />
 
-      <main className="mainContent">{children}</main>
+      <main className="mainContent">
+        {!session.isLoggedIn && (
+          <h2>You are not logged in, the basket will be saved temporarily</h2>
+        )}
+        {children}
+      </main>
 
       <style jsx global>{`
         html,

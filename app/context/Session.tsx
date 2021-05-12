@@ -3,6 +3,7 @@ import {
   createContext,
   Dispatch,
   FunctionComponent,
+  useCallback,
   useContext,
   useEffect,
   useState,
@@ -12,6 +13,7 @@ import { ISession } from '../types';
 interface ISessionStateContext {
   session: ISession;
   setSession: Dispatch<any>;
+  logout: () => void;
 }
 
 const SessionStateContext = createContext<ISessionStateContext | null>(null);
@@ -24,17 +26,27 @@ const useSessionState = (): ISessionStateContext => {
     );
   return context;
 };
+const initialState = {
+  isLoggedIn: false,
+  firstName: '',
+  lastName: '',
+  email: '',
+  basketId: '',
+};
 
 const SessionStateProvider: FunctionComponent = ({ children }) => {
-  const [session, setSession] = useState<ISession>({
-    isLoggedIn: false,
-    firstName: '',
-    lastName: '',
-    email: '',
-    basketId: '',
-  });
+  const [session, setSession] = useState<ISession>(initialState);
 
-  const value: ISessionStateContext = { session, setSession };
+  const logout = useCallback(async () => {
+    const responseData = await AuthenticationService.logout();
+    if (!responseData.error) setSession(initialState);
+  }, []);
+
+  const value: ISessionStateContext = {
+    session,
+    setSession,
+    logout,
+  };
 
   useEffect(() => {
     AuthenticationService.verifyActiveSession()

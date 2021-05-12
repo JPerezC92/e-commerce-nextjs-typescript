@@ -2,11 +2,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Badge } from '@material-ui/core';
 import AddShoppingCart from '@material-ui/icons/AddShoppingCart';
+import ExitToAppOutlinedIcon from '@material-ui/icons/ExitToAppOutlined';
 
 import useNavbarVisibility from '../hooks/useNavbarVisibility';
 import { useBasketState } from 'app/context/Basket';
+import { useSessionState } from 'app/context/Session';
 
 const Navbar = (): JSX.Element => {
+  const { session, logout } = useSessionState();
   const { isVisible } = useNavbarVisibility();
   const { totalItemsQuantity } = useBasketState();
 
@@ -26,16 +29,6 @@ const Navbar = (): JSX.Element => {
 
       <ul>
         <li>
-          <Link href="/login">
-            <a className="nav__link">Login</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/signup">
-            <a className="nav__link">Signup</a>
-          </Link>
-        </li>
-        <li>
           <Link href="/checkout">
             <a>
               <Badge badgeContent={totalItemsQuantity} color="secondary">
@@ -44,6 +37,29 @@ const Navbar = (): JSX.Element => {
             </a>
           </Link>
         </li>
+
+        {!session.isLoggedIn ? (
+          <>
+            <li>
+              <Link href="/login">
+                <a className="nav__link">Login</a>
+              </Link>
+            </li>
+            <li>
+              <Link href="/signup">
+                <a className="nav__link">Signup</a>
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li>
+            <button type="button" onClick={logout} title="Logout">
+              <ExitToAppOutlinedIcon
+                style={{ color: '#fff', backgroundColor: '#000' }}
+              />
+            </button>
+          </li>
+        )}
       </ul>
 
       <style jsx>{`
@@ -75,6 +91,9 @@ const Navbar = (): JSX.Element => {
         }
         .nav__link:hover {
           border-bottom: 1px solid #fec200;
+        }
+        button {
+          cursor: pointer;
         }
       `}</style>
     </header>

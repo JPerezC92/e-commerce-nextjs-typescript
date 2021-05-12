@@ -15,7 +15,7 @@ type TBasketHook = () => IBasketHook;
 
 const useBasket: TBasketHook = () => {
   const {
-    session: { basketId },
+    session: { isLoggedIn, basketId },
   } = useSessionState();
   const { basketProducts, setBasketProducts } = useBasketState();
 
@@ -25,6 +25,7 @@ const useBasket: TBasketHook = () => {
     const basketProductExists = basketProducts.some(
       ({ _id }) => _id === basketProduct._id
     );
+
     let newBasketProducstState: IBasketProduct[];
 
     if (!basketProductExists) {
@@ -39,23 +40,32 @@ const useBasket: TBasketHook = () => {
       ];
     }
 
-    const responseData = await BasketService.updateBasket(
-      basketId,
-      newBasketProducstState
-    );
+    if (isLoggedIn) {
+      const responseData = await BasketService.updateBasket(
+        basketId,
+        newBasketProducstState
+      );
 
-    if (!responseData.error) setBasketProducts(newBasketProducstState);
+      if (!responseData.error) setBasketProducts(newBasketProducstState);
+    } else {
+      setBasketProducts(newBasketProducstState);
+    }
   };
 
   const handleDelete: handleDelete = async (basketProductId) => {
     const newBasketProducstState = basketProducts.filter(
       ({ _id }) => _id !== basketProductId
     );
-    const responseData = await BasketService.updateBasket(
-      basketId,
-      newBasketProducstState
-    );
-    if (!responseData.error) setBasketProducts(newBasketProducstState);
+    if (isLoggedIn) {
+      const responseData = await BasketService.updateBasket(
+        basketId,
+        newBasketProducstState
+      );
+
+      if (!responseData.error) setBasketProducts(newBasketProducstState);
+    } else {
+      setBasketProducts(newBasketProducstState);
+    }
   };
 
   return { handleAdd, handleDelete };
