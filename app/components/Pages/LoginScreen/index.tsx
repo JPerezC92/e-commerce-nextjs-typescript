@@ -6,10 +6,14 @@ const LoginScreen = (): JSX.Element => {
 
   return (
     <>
-      <div>
-        {loginHook.errorMessage.length > 0 && <div>{loginHook.errorMessage}</div>}
+      <div className="login">
+        {loginHook.errorMessage.length > 0 && (
+          <div>{loginHook.errorMessage}</div>
+        )}
 
-        <form onSubmit={loginHook.handleSubmit}>
+        <h1 className="login__title">Login</h1>
+
+        <form onSubmit={loginHook.handleSubmit} className="login__form">
           <label htmlFor="email">
             Email
             <input
@@ -37,6 +41,30 @@ const LoginScreen = (): JSX.Element => {
           <button type="submit">Register</button>
         </form>
       </div>
+
+      <style jsx>{`
+        .login {
+          display: flex;
+          flex-direction: column;
+          max-width: 25rem;
+          margin: auto;
+        }
+
+        .login__title {
+          margin: 1rem 0;
+        }
+
+        .login__form {
+          display: flex;
+          flex-direction: column;
+          row-gap: 1rem;
+        }
+
+        .login__form > label {
+          display: flex;
+          flex-direction: column;
+        }
+      `}</style>
     </>
   );
 };

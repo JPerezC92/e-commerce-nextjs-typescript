@@ -10,7 +10,9 @@ const Layout = ({ children }: { children: ReactNode }): JSX.Element => {
 
       <main className="mainContent">
         {!session.isLoggedIn && (
-          <h2>You are not logged in, the basket will be saved temporarily</h2>
+          <h2 style={{ textAlign: 'center' }}>
+            You are not logged in, the basket will be saved temporarily
+          </h2>
         )}
         {children}
       </main>

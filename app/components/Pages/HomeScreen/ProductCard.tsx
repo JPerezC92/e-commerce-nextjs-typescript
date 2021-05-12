@@ -18,9 +18,17 @@ const ProductCard = ({ product, basketHook }: IProductCard) => {
   return (
     <>
       <li className="product__item">
-        <Image src={mediaUrl} width="100" height="80" layout="responsive" objectFit="cover" />
+        <Image
+          src={mediaUrl}
+          width="100"
+          height="80"
+          layout="responsive"
+          objectFit="cover"
+        />
 
-        <span className="product__price">{accounting.formatMoney(price, 'S/')}</span>
+        <span className="product__price">
+          {accounting.formatMoney(price, 'S/')}
+        </span>
         <Rating
           style={{ alignSelf: 'center', marginTop: '1rem' }}
           name="half-rating-read"
@@ -32,7 +40,7 @@ const ProductCard = ({ product, basketHook }: IProductCard) => {
           <Link href="/product/[id]" as={`/product/${_id}`}>
             <a className="product__name">{name}</a>
           </Link>
-          <p>{description}</p>
+          <p className="content__description">{description}</p>
 
           <button
             type="button"
@@ -89,11 +97,15 @@ const ProductCard = ({ product, basketHook }: IProductCard) => {
           flex: 1;
         }
 
+        .content__description {
+          margin-bottom: 1.5rem;
+        }
+
         .card__button {
           cursor: pointer;
           background-color: transparent;
           border: none;
-          margin-top: 1rem;
+          margin-top: auto;
           text-align: center;
           height: auto;
           width: 100%;
