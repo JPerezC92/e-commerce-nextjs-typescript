@@ -53,8 +53,6 @@ const SessionStateProvider: FunctionComponent = ({ children }) => {
       .then((result) => {
         if (!result.error) {
           setSession(result.session);
-        } else {
-          console.log(result.message);
         }
       })
       .catch((err) => {

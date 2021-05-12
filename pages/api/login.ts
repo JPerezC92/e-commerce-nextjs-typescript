@@ -1,7 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { sign } from 'jsonwebtoken';
 import cookie from 'cookie';
-import { compare } from 'bcrypt';
+import { compare } from 'db/Utils/bcrypt.min.js';
 import connectDB from 'db/connectDB';
 import Users from 'db/models/Users';
 

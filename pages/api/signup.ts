@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { hash } from 'bcrypt';
+import { hash } from 'db/Utils/bcrypt.min.js';
 import connectDB from 'db/connectDB';
 import Users from 'db/models/Users';
 import Baskets from 'db/models/Baskets';
@@ -12,7 +12,10 @@ interface ISignupBody {
   confirmPassword: string;
 }
 
-const signup = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const signup = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
     await connectDB();
 
@@ -34,11 +37,17 @@ const signup = async (req: NextApiRequest, res: NextApiResponse): Promise<void> 
     const user = await Users.create({ ...values, basketId: `${newBasketId}` });
 
     if (user._id)
-      return res.status(200).json({ error: false, message: 'Account created successfully' });
+      return res
+        .status(200)
+        .json({ error: false, message: 'Account created successfully' });
 
-    return res.status(500).json({ error: true, message: 'Error creating account' });
+    return res
+      .status(500)
+      .json({ error: true, message: 'Error creating account' });
   } catch (error) {
-    return res.status(500).json({ error: true, message: error || 'Error creating account' });
+    return res
+      .status(500)
+      .json({ error: true, message: error || 'Error creating account' });
   }
 };
 

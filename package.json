@@ -30,7 +30,6 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/lab": "^4.0.0-alpha.58",
     "accounting": "^0.4.1",
-    "bcrypt": "^5.0.1",
     "cookie": "^0.4.1",
     "isomorphic-fetch": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
