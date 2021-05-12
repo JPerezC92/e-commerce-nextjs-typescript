@@ -10,9 +10,9 @@ import {
   useState,
 } from 'react';
 import { IBasketProduct } from '../types';
+import { useSessionState } from './Session';
 
 interface IBasketStateContext {
-  basketId: string;
   basketProducts: IBasketProduct[];
   setBasketProducts: Dispatch<SetStateAction<any[]>>;
   totalItemsQuantity: number;
@@ -23,7 +23,8 @@ const BasketStateContext = createContext({} as IBasketStateContext);
 
 const useBasketState = (): IBasketStateContext => {
   const context = useContext(BasketStateContext);
-  if (!context) throw new Error('useBasketState must be used within a BasketStateContext');
+  if (!context)
+    throw new Error('useBasketState must be used within a BasketStateContext');
   return context;
 };
 
@@ -37,7 +38,8 @@ const totalItemsQuantityAndTotalCost = (basketProducts: IBasketProduct[]) =>
   );
 
 const BasketStateProvider: FunctionComponent = ({ children }) => {
-  const basketId = '608debb581d6a16540948074';
+  // const basketId = '608debb581d6a16540948074';
+  const { session } = useSessionState();
   const [basketProducts, setBasketProducts] = useState([] as IBasketProduct[]);
 
   const { totalItemsQuantity, totalCost } = useMemo(
@@ -46,20 +48,25 @@ const BasketStateProvider: FunctionComponent = ({ children }) => {
   );
 
   useEffect(() => {
-    BasketService.getById(basketId).then((data) => {
-      if (!data.error) setBasketProducts(data.payload.items);
-    });
-  }, []);
+    if (session.isLoggedIn) {
+      BasketService.getById(session.basketId).then((data) => {
+        if (!data.error) setBasketProducts(data.payload.items);
+      });
+    }
+  }, [session.isLoggedIn]);
 
   const value: IBasketStateContext = {
-    basketId,
     basketProducts,
     setBasketProducts,
     totalItemsQuantity,
     totalCost,
   };
 
-  return <BasketStateContext.Provider value={value}>{children}</BasketStateContext.Provider>;
+  return (
+    <BasketStateContext.Provider value={value}>
+      {children}
+    </BasketStateContext.Provider>
+  );
 };
 
 export { BasketStateProvider, useBasketState };

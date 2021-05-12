@@ -1,20 +1,12 @@
 import connectDB from 'db/connectDB';
 import Baskets from 'db/models/Baskets';
 import { FunctionRequest, IBasketReq } from '@/types/*';
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
-import { verify } from 'jsonwebtoken';
-import process from 'process';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-const authenticated = (fn: NextApiHandler) => async (req: NextApiRequest, res: NextApiResponse) => {
-  const auth = req.cookies.auth;
-  verify(auth, process.env.JWT_SECRET_KEY, (err, decoded) => {
-    if (!err && decoded) return fn(req, res);
-
-    return res.status(401).json({ error: true, message: 'Sorry, you are not authenticated' });
-  });
-};
-
-const basket: FunctionRequest = async (req, res): Promise<void> => {
+const basket: FunctionRequest = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   await connectDB();
   try {
     switch (req.method) {
@@ -47,4 +39,4 @@ const getBasketById: FunctionRequest = async (req, res) => {
   res.status(200).json({ error: false, payload: basket });
 };
 
-export default authenticated(basket);
+export default basket;

@@ -18,7 +18,10 @@ interface IUser {
   basketId: string;
 }
 
-const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> => {
+const login = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+): Promise<void> => {
   try {
     await connectDB();
 
@@ -35,15 +38,19 @@ const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> =
     const isValid = await compare(values.password, user.password);
 
     if (!isValid)
-      return res.status(401).json({ error: true, message: 'El email o contraseña es incorrecto' });
+      return res
+        .status(401)
+        .json({ error: true, message: 'El email o contraseña es incorrecto' });
 
     const claims = {
+      isLoggedIn: true,
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
       basketId: user.basketId,
     };
-    const jwt = sign(claims, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }) || 'here';
+    const jwt =
+      sign(claims, process.env.JWT_SECRET_KEY, { expiresIn: '1h' }) || 'here';
 
     res.setHeader(
       'Set-Cookie',
@@ -58,9 +65,15 @@ const login = async (req: NextApiRequest, res: NextApiResponse): Promise<void> =
 
     return res
       .status(200)
-      .json({ error: false, message: 'Welcome back to the app!', session: claims });
+      .json({
+        error: false,
+        message: 'Welcome back to the app!',
+        session: claims,
+      });
   } catch (error) {
-    return res.status(500).json({ error: true, message: 'Error creating account' });
+    return res
+      .status(500)
+      .json({ error: true, message: 'Error creating account' });
   }
 };
 

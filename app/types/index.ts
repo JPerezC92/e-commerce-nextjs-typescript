@@ -35,6 +35,7 @@ export interface IBasket {
 }
 
 export interface ISession extends IUser {
+  isLoggedIn: boolean;
   basketId: string;
 }
 
@@ -53,7 +54,10 @@ export interface IProductsDetailsProps extends IProductReqResponse {
 Api Request
 ================================
 */
-export type FunctionRequest = (req: NextApiRequest, res: NextApiResponse) => Promise<void>;
+export type FunctionRequest = (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => Promise<void>;
 
 export interface IBasketReq {
   basketProducts: IBasketProduct[];

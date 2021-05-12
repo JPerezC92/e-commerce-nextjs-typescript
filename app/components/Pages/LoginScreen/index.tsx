@@ -7,7 +7,8 @@ const LoginScreen = (): JSX.Element => {
   return (
     <>
       <div>
-        <div>{loginHook.errorMessage.length > 0 && <div>{loginHook.errorMessage}</div>}</div>
+        {loginHook.errorMessage.length > 0 && <div>{loginHook.errorMessage}</div>}
+
         <form onSubmit={loginHook.handleSubmit}>
           <label htmlFor="email">
             Email

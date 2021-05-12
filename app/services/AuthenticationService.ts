@@ -7,6 +7,10 @@ interface ILoginResponse extends IResponse {
   session: ISession;
 }
 
+interface IVerifyActiveSession extends IResponse {
+  session: ISession;
+}
+
 export default {
   signup: async (values: ISignupInputState): Promise<Required<IResponse>> => {
     const result = await apiConnect({
@@ -32,6 +36,12 @@ export default {
       },
     });
 
+    const data = await result.json();
+    return data;
+  },
+
+  verifyActiveSession: async (): Promise<IVerifyActiveSession> => {
+    const result = await apiConnect({ input: 'session' });
     const data = await result.json();
     return data;
   },

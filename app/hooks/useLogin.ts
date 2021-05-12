@@ -1,3 +1,4 @@
+import { useSessionState } from 'app/context/Session';
 import AuthenticationService from 'app/services/AuthenticationService';
 import { FormEvent, useState } from 'react';
 import useInputValues, { IInputValuesHook } from './useInputValues';
@@ -16,6 +17,8 @@ interface ILoginHook extends IInputValuesHook<ILoginInputState> {
 type TLoginHook = () => ILoginHook;
 
 const useLogin: TLoginHook = () => {
+  const { setSession } = useSessionState();
+
   const [errorMessage, setErrorMessage] = useState('');
   const { inputValues, handleOnChange } = useInputValues<ILoginInputState>({
     email: '',
@@ -28,6 +31,7 @@ const useLogin: TLoginHook = () => {
     if (responseData.error) setErrorMessage(responseData.message);
 
     console.log(responseData.session);
+    setSession(responseData.session);
   };
 
   return { inputValues, handleOnChange, handleSubmit, errorMessage };
