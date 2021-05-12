@@ -1,5 +1,6 @@
 import { useSessionState } from 'app/context/Session';
 import AuthenticationService from 'app/services/AuthenticationService';
+import { useRouter } from 'next/router';
 import { FormEvent, useState } from 'react';
 import useInputValues, { IInputValuesHook } from './useInputValues';
 
@@ -17,6 +18,7 @@ interface ILoginHook extends IInputValuesHook<ILoginInputState> {
 type TLoginHook = () => ILoginHook;
 
 const useLogin: TLoginHook = () => {
+  const router = useRouter();
   const { setSession } = useSessionState();
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -30,8 +32,8 @@ const useLogin: TLoginHook = () => {
     const responseData = await AuthenticationService.login(inputValues);
     if (responseData.error) setErrorMessage(responseData.message);
 
-    console.log(responseData.session);
     setSession(responseData.session);
+    router.push('/');
   };
 
   return { inputValues, handleOnChange, handleSubmit, errorMessage };

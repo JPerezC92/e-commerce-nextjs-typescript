@@ -1,13 +1,13 @@
 import { ReactNode, useState } from 'react';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
+// import { useRouter } from 'next/router';
 
 import { IProduct } from '@/types/*';
 import { Button, Modal } from '@material-ui/core';
 import { AddCircleOutlineOutlined, Delete } from '@material-ui/icons';
 import { Rating } from '@material-ui/lab';
 import accounting from 'accounting';
-import baseUrl from 'app/utils/baseUrl';
+// import baseUrl from 'app/utils/baseUrl';
 import useBasket from 'app/hooks/useBasket';
 
 interface IProductDetailsScreen {
@@ -15,23 +15,23 @@ interface IProductDetailsScreen {
   product: IProduct;
 }
 
-const ProductDetailsScreen = ({ product }: IProductDetailsScreen): JSX.Element => {
+const ProductDetailsScreen = ({
+  product,
+}: IProductDetailsScreen): JSX.Element => {
   const { _id, description, mediaUrl, name, price, rating } = product;
-  const router = useRouter();
+  // const router = useRouter();
   const [open, setOpen] = useState(false);
 
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
 
-  const handleDeleteProduct = async () => {
-    const result = await fetch(`${baseUrl}api/product/${_id}`, {
-      method: 'DELETE',
-    });
-
-    await result.json();
-
-    router.push('/');
-  };
+  // const handleDeleteProduct = async () => {
+  //   const result = await fetch(`${baseUrl}api/product/${_id}`, {
+  //     method: 'DELETE',
+  //   });
+  //   await result.json();
+  //   router.push('/');
+  // };
 
   const basketHook = useBasket();
 
@@ -39,7 +39,13 @@ const ProductDetailsScreen = ({ product }: IProductDetailsScreen): JSX.Element =
     <>
       <div className="product">
         <div className="product__image">
-          <Image src={mediaUrl} width="400" height="250" layout="responsive" objectFit="cover" />
+          <Image
+            src={mediaUrl}
+            width="400"
+            height="250"
+            layout="responsive"
+            objectFit="cover"
+          />
         </div>
         <div className="product__info">
           <h2>{name}</h2>
@@ -59,7 +65,9 @@ const ProductDetailsScreen = ({ product }: IProductDetailsScreen): JSX.Element =
               variant="contained"
               color="secondary"
               startIcon={<AddCircleOutlineOutlined />}
-              onClick={() => basketHook.handleAdd({ _id, mediaUrl, name, price })}
+              onClick={() =>
+                basketHook.handleAdd({ _id, mediaUrl, name, price })
+              }
             >
               ADD
             </Button>
@@ -89,14 +97,17 @@ const ProductDetailsScreen = ({ product }: IProductDetailsScreen): JSX.Element =
               </p>
 
               <div className="modal__actions">
-                <Button variant="contained" color="secondary" onClick={handleClose}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleClose}
+                >
                   Cancel
                 </Button>
                 <Button
                   variant="contained"
                   color="secondary"
                   endIcon={<Delete />}
-                  onClick={handleDeleteProduct}
                 >
                   Yes, please
                 </Button>

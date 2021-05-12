@@ -61,7 +61,7 @@ const SignupScreen = (): JSX.Element => {
           <label htmlFor="Password">
             Password
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               required
@@ -73,7 +73,7 @@ const SignupScreen = (): JSX.Element => {
           <label htmlFor="Confirm Password">
             Confirm Password
             <input
-              type="text"
+              type="password"
               name="confirmPassword"
               id="confirmPassword"
               required

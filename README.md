@@ -1,27 +1,195 @@
-# NextJS Typescript Boilerplate
+# Backend
 
-Bootstrap a developer-friendly NextJS app configured with:
+## Session
+****
+ **Sign up**
+`GET` api/signup
 
-- [Typescript](https://www.typescriptlang.org/)
-- Linting with [ESLint](https://eslint.org/)
-- Formatting with [Prettier](https://prettier.io/)
-- Linting, typechecking and formatting on by default using [`husky`](https://github.com/typicode/husky) for commit hooks
-- Testing with [Jest](https://jestjs.io/) and [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro)
-
-## Deploy your own
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript-eslint-jest&project-name=with-typescript-eslint-jest&repository-name=with-typescript-eslint-jest)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-typescript-eslint-jest with-typescript-eslint-jest-app
-# or
-yarn create next-app --example with-typescript-eslint-jest with-typescript-eslint-jest-app
+*object request:*
+```
+  {
+    firstName: <string>;
+    lastName: <string>;
+    email: <string>;
+    password: <string>;
+    confirmPassword: <string>;
+  }
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+*object response:*
+```
+  {
+    error: <boolean>,
+    message: <string>;
+  }
+```
+
+* * *
+ **Login**
+`POST` api/login
+
+*object request:*
+```
+  {
+    email: <string>,
+    password: <string>
+  }
+```
+
+*object response:*
+```
+  {
+
+    "error": <boolean>,
+    "message": <string>;
+    "session":  {
+        firstName:  <string>,
+        lastName:  <string>,
+        email:  <string>,
+        basketId:  <string>
+    }
+  }
+```
+
+* * *
+ **Verify Active Session**
+`GET` api/session
+*object response:*
+```
+  {
+    error: <boolean>,
+    session: {
+        isLoggedIn: <boolean>,
+        firstName: <string>,
+        lastName: <string>,
+        email: <string>,
+        basketId: <string>
+	  }
+  }
+```
+
+* * *
+ **Logout**
+`DELETE` api/logout
+*object response:*
+```
+  {
+    error: <boolean>,
+    message: <string>
+  }
+```
+
+## Products
+****
+
+ **Products**
+`GET` api/products
+*object response:*
+```
+  {
+    error: <boolean>,
+    payload: [{
+            _id: <string>,
+            name: <string>,
+            price: <number>,
+            description: <string>,
+            mediaUrl: <string>,
+            rating: <number>
+    }]
+  }
+```
+* * *
+ **Product**
+`GET` api/product/[id]
+
+*object response:*
+```
+  {
+
+    error: <boolean>,
+    payload: {
+        _id: <string>,
+        name: <string>,
+        price: <number>,
+        description: <string>,
+        mediaUrl: <string>,
+        rating: <number>
+    }
+  }
+```
+* * *
+ **Product**
+`DELETE` api/product/[id]
+
+*object response:*
+```
+  {
+
+    "error": <boolean>,
+    "message": <string>,
+  }
+```
+
+
+
+## Baskets
+****
+
+ **Baskets**
+`GET` api/baskets
+*object response:*
+```
+  {
+    error: <boolean>,
+    message: [{
+        _id: <string>,
+        name: <string>,
+        price: <number>,
+        mediaUrl: <string>,
+        quantity?: <number>
+    }]
+  }
+```
+***
+ **Baskets**
+`POST` api/baskets/[id]
+*object response:*
+```
+  {
+    error: <boolean>,
+    message: [{
+        _id: <string>,
+        name: <string>,
+        price: <number>,
+        mediaUrl: <string>,
+        quantity?: <number>
+    }]
+  }
+```
+***
+ **Baskets**
+`GET` api/baskets/[id]
+*object response:*
+```
+  {
+    error: <boolean>,
+    message: [{
+        _id: <string>,
+        name: <string>,
+        price: <number>,
+        mediaUrl: <string>,
+        quantity?: <number>
+    }]
+  }
+```
+
+# Frontend
+## How to use
+
+* Clone the project
+* execute ```npm install```
+* execute ```npm run dev```
+* Open browser in localhost:3000
+
+## Url project
+https://e-commerce-delta-dun.vercel.app/

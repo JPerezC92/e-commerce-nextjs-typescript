@@ -47,7 +47,10 @@ export default {
   },
 
   logout: async (): Promise<IResponse> => {
-    const result = await apiConnect({ input: 'logout' });
+    const result = await apiConnect({
+      input: 'logout',
+      init: { method: 'DELETE' },
+    });
     const data = await result.json();
     return data;
   },

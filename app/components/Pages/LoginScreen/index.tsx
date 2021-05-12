@@ -29,7 +29,7 @@ const LoginScreen = (): JSX.Element => {
           <label htmlFor="Password">
             Password
             <input
-              type="text"
+              type="password"
               name="password"
               id="password"
               required
