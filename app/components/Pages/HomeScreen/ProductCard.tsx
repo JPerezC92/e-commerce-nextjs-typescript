@@ -4,15 +4,15 @@ import Link from 'next/link';
 import { Rating } from '@material-ui/lab';
 
 import { IProduct } from '@/types/*';
+import useBasket from 'app/hooks/useBasket';
 import accounting from 'accounting';
-import type { IBasketHook } from 'app/hooks/useBasket';
 
 interface IProductCard {
   product: IProduct;
-  basketHook: IBasketHook;
 }
 
-const ProductCard = ({ product, basketHook }: IProductCard) => {
+const ProductCard = ({ product }: IProductCard) => {
+  const basketHook = useBasket();
   const { _id, description, mediaUrl, name, price, rating } = product;
 
   return (

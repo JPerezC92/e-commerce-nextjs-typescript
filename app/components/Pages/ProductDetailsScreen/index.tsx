@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { IProduct } from '@/types/*';
 import { Button, Modal } from '@material-ui/core';
-import { AddCircleOutlineOutlined, Delete } from '@material-ui/icons';
+import { AddCircleOutlineOutlined } from '@material-ui/icons';
 import { Rating } from '@material-ui/lab';
 import accounting from 'accounting';
 // import baseUrl from 'app/utils/baseUrl';
@@ -21,9 +21,8 @@ const ProductDetailsScreen = ({
   const { _id, description, mediaUrl, name, price, rating } = product;
   // const router = useRouter();
   const [open, setOpen] = useState(false);
-
   const handleClose = () => setOpen(false);
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
 
   // const handleDeleteProduct = async () => {
   //   const result = await fetch(`${baseUrl}api/product/${_id}`, {
@@ -71,14 +70,14 @@ const ProductDetailsScreen = ({
             >
               ADD
             </Button>
-            <Button
+            {/* <Button
               variant="contained"
               color="secondary"
               startIcon={<Delete />}
               onClick={handleOpen}
             >
               DELETE
-            </Button>
+            </Button> */}
           </div>
           <p>{description}</p>
         </div>
@@ -104,13 +103,13 @@ const ProductDetailsScreen = ({
                 >
                   Cancel
                 </Button>
-                <Button
+                {/* <Button
                   variant="contained"
                   color="secondary"
                   endIcon={<Delete />}
                 >
                   Yes, please
-                </Button>
+                </Button> */}
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@ const LoginScreen = (): JSX.Element => {
             />
           </label>
 
-          <button type="submit">Register</button>
+          <button type="submit">Login</button>
         </form>
       </div>
 

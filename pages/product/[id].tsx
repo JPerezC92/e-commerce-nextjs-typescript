@@ -8,12 +8,15 @@ import Products from 'db/models/Products';
 import { APP_NAME } from 'app/utils/constants';
 import ProductDetailsScreen from '@/components/Pages/ProductDetailsScreen';
 
-const ProductDetails = ({ error, payload: product }: IProductsDetailsProps): JSX.Element => {
+const ProductDetails = ({
+  error,
+  payload: product,
+}: IProductsDetailsProps): JSX.Element => {
   const { isFallback } = useRouter();
 
   if (error) return <div>El articulo no se encuentra disponible</div>;
 
-  if (isFallback) return <div>Cargando</div>;
+  if (isFallback) return <div style={{ textAlign: 'center' }}>Loading</div>;
 
   return (
     <>
